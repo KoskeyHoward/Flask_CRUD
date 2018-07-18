@@ -1,14 +1,15 @@
 from flask import Flask, render_template
-
+from data import Articles
 app = Flask(__name__)
 
+#define routes
 @app.route('/')
 def index():
     return render_template('home.html')
 
 @app.route('/blog')
 def blog():
-    return render_template('blog.html')
+    return render_template('blog.html', blog = Articles)
 
 @app.route('/lifestyle')
 def lifestyle():
@@ -22,8 +23,13 @@ def travel():
 def about():
     return render_template('about.html')
 
+#route for specific article
+@app.route('/article/<string:id>/')
+def article(id):
+    return render_template('article.html', id = id)
 
-
+#get articles
+Articles = Articles()
 
 
 
